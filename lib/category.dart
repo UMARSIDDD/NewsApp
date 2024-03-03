@@ -11,7 +11,9 @@ class Category extends StatefulWidget {
 }
 
 class _CategoryState extends State<Category> {
-  int selectedCard = -1;
+  // int selectedCard = -1;
+  List<Categorys> selectedCategories = [];
+  List<String> title = [];
 
   List<Categorys> categories = [
     Categorys("assets/image/index1.jpg", 'Healthcare', false),
@@ -22,11 +24,11 @@ class _CategoryState extends State<Category> {
     Categorys("assets/image/index6.jpg", 'Technology', false),
     Categorys("assets/image/index7.jpg", 'Nature', false),
     Categorys("assets/image/index8.jpg", 'Fashion', false),
-    Categorys("assets/image/index8.jpg", 'Fashion', false),
-    Categorys("assets/image/index8.jpg", 'Fashion', false),
-    Categorys("assets/image/index8.jpg", 'Fashion', false),
-    Categorys("assets/image/index8.jpg", 'Fashion', false),
-    Categorys("assets/image/index8.jpg", 'Fashion', false),
+    // Categorys("assets/image/index8.jpg", 'Fashion', false),
+    // Categorys("assets/image/index8.jpg", 'Fashion', false),
+    // Categorys("assets/image/index8.jpg", 'Fashion', false),
+    // Categorys("assets/image/index8.jpg", 'Fashion', false),
+    // Categorys("assets/image/index8.jpg", 'Fashion', false),
   ];
 
   @override
@@ -77,12 +79,23 @@ class _CategoryState extends State<Category> {
                             (MediaQuery.of(context).size.height / 3),
                       ),
                       itemBuilder: (BuildContext context, int index) {
+                        final category = categories[index];
+                        final isSelected =
+                            selectedCategories.contains(category);
                         return GestureDetector(
                           onTap: () {
                             setState(() {
                               setState(() {
-                                categories[index].isSelected =
-                                    !categories[index].isSelected;
+                                category.isSelected = !category.isSelected;
+
+                                if (isSelected) {
+                                  selectedCategories.remove(category);
+                                  title.remove(category.name);
+                                } else {
+                                  selectedCategories.add(category);
+                                  title.add(category.name);
+                                }
+                                print(title);
                               });
                             });
                           },
@@ -90,7 +103,7 @@ class _CategoryState extends State<Category> {
                             shape: RoundedRectangleBorder(
                                 side: BorderSide(
                                     width: 4,
-                                    color: categories[index].isSelected
+                                    color: category.isSelected
                                         ? Colors.purple
                                         : Colors.white),
                                 borderRadius: BorderRadius.circular(10)),
