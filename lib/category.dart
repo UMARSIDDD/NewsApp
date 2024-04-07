@@ -1,7 +1,10 @@
 // ignore_for_file: unused_local_variable
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'model/categoryModel.dart';
+import 'package:http/http.dart' as http;
 
 class Category extends StatefulWidget {
   const Category({super.key});
@@ -30,6 +33,33 @@ class _CategoryState extends State<Category> {
     // Categorys("assets/image/index8.jpg", 'Fashion', false),
     // Categorys("assets/image/index8.jpg", 'Fashion', false),
   ];
+  // final String apiUrl = "dfhsd";
+  // Future<void> sendDetail() async {
+  //   final response = await http.post(Uri.parse(apiUrl));
+  //   if (response.statusCode == 200) {
+  //     final data = jsonDecode(response.body);
+  //     final articles = data['articles'] as List<dynamic>;
+  //   }
+
+  Future<void> sendCategoriesToBackend(List<String> title) async {
+    final String backendUrl = 'https://example.com/api/interests';
+
+    try {
+      final http.Response response = await http.post(
+        Uri.parse(backendUrl),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({'interests': title}),
+      );
+
+      if (response.statusCode == 201) {
+        print('Categories sent successfully');
+      } else {
+        print('Failed to send categories. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

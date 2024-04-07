@@ -22,7 +22,7 @@ class _NewsListState extends State<NewsList> {
 
   @override
   void initState() {
-    super.initState(); 
+    super.initState();
     LikedNews = newsItems;
     fetchNews();
   }

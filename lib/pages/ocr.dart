@@ -77,8 +77,7 @@ class _ocr_text_recognizeState extends State<ocr_text_recognize>
               ),
             Scaffold(
               appBar: AppBar(
-                title: const Text('Text Recognition Sample',
-                    style: TextStyle(color: Colors.purple)),
+                title: const Text('Text Recognition Sample'),
               ),
               backgroundColor: _isPermissionGranted ? Colors.transparent : null,
               body: _isPermissionGranted
@@ -186,7 +185,7 @@ class _ocr_text_recognizeState extends State<ocr_text_recognize>
       await navigator.push(
         MaterialPageRoute(
           builder: (BuildContext context) =>
-              ResultScreen(text: recognizedText.text),
+              ResultScreen(scanText: recognizedText.text),
         ),
       );
     } catch (e) {

@@ -19,18 +19,20 @@ class _MyRegisterPageState extends State<MyRegisterPage> {
   final emailTextController = TextEditingController();
   final passwordController = TextEditingController();
   final confirPasswordController = TextEditingController();
-
-  Future<void> submit(email, password) async {
+  final InterestTextcontroller = TextEditingController();
+  Future<void> submit(email, password, interest) async {
     final body = {
       'email': email.toString(),
       'password': password.toString(),
+      'topic': interest.toString(),
     };
-    const url = 'http://10.0.2.2:8000/api/reg/';
+    const url = 'https://9614-103-248-31-54.ngrok-free.app/Register/';
     final uri = Uri.parse(url);
     final response = await http.post(
       uri,
       body: body,
     );
+
     if (response.statusCode == 201) {
       Navigator.pushReplacementNamed(context, 'login/');
     } else {
@@ -112,6 +114,18 @@ class _MyRegisterPageState extends State<MyRegisterPage> {
                       ),
                       obscureText: true,
                     ),
+                    const SizedBox(height: 20),
+                    TextField(
+                      controller: InterestTextcontroller,
+                      decoration: InputDecoration(
+                          hintText: "Intrested Topic",
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(18),
+                              borderSide: BorderSide.none),
+                          fillColor: Colors.purple.withOpacity(0.1),
+                          filled: true,
+                          prefixIcon: const Icon(Icons.interests_outlined)),
+                    ),
                   ],
                 ),
                 Container(
@@ -122,8 +136,9 @@ class _MyRegisterPageState extends State<MyRegisterPage> {
                             emailTextController.text; // You can add email input
                         String password = passwordController.text;
                         String confirmpass = confirPasswordController.text;
+                        String interest = InterestTextcontroller.text;
                         if (password == confirmpass) {
-                          Navigator.pushReplacementNamed(context, 'login/');
+                          submit(email, password, interest);
                         }
                       },
                       style: ElevatedButton.styleFrom(

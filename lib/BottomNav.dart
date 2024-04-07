@@ -6,6 +6,7 @@ import 'package:newsapp/pages/Profile.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:newsapp/pages/like.dart';
 import 'package:newsapp/pages/ocr.dart';
+import 'package:newsapp/pages/recommend.dart';
 
 import 'pages/HomeScreen.dart';
 
@@ -24,6 +25,7 @@ class _BottomNavState extends State<BottomNav> {
     const ocr_text_recognize(),
     const SearchCategory(),
     const Profile(),
+    const RecommendationScreen()
   ];
 
   void _onItemTapped(int index) {
@@ -72,7 +74,11 @@ class _BottomNavState extends State<BottomNav> {
                     GButton(
                       icon: Icons.person,
                       text: 'Profile',
-                    )
+                    ),
+                    GButton(
+                      icon: Icons.receipt,
+                      text: 'Recommendation',
+                    ),
                   ]),
             ),
           ),

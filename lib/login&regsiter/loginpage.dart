@@ -22,7 +22,7 @@ class _LoginPageState extends State<LoginPage> {
       'username': email.toString(),
       'password': password.toString(),
     };
-    const url = 'http://127.0.0.1/:8000/api/login/';
+    const url = 'https://9614-103-248-31-54.ngrok-free.app/Login/';
     final uri = Uri.parse(url);
     final response = await http.post(
       uri,
@@ -58,6 +58,7 @@ class _LoginPageState extends State<LoginPage> {
   _header(context) {
     return const Column(
       children: [
+        
         Text(
           "Welcome Back",
           style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
@@ -103,8 +104,8 @@ class _LoginPageState extends State<LoginPage> {
             String email = emailTextController.text;
             String password = passwordController.text;
 
-            // submit(email, password);
-            Navigator.pushReplacementNamed(context, 'category/');
+            submit(email, password);
+            // Navigator.pushReplacementNamed(context, 'category/');
           },
           style: ElevatedButton.styleFrom(
             shape: const StadiumBorder(),

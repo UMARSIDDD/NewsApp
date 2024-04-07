@@ -4,7 +4,9 @@ import 'dart:math';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:newsapp/model/liked.dart';
 import 'package:newsapp/model/newsModelHeadline.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
@@ -17,6 +19,7 @@ class HomeScreen extends StatefulWidget {
 
 class HomeScreenState extends State<HomeScreen> {
   List<String> categories = ['Technology', 'science', 'sports', 'politics'];
+  // List<String> likedArticle = [];
 
   final String apiUrl =
       // 'https://newsapi.org/v2/top-headlines?country=us&apiKey=96b9899434d04821acdb41e4e74be3ce';
@@ -156,28 +159,36 @@ class HomeScreenState extends State<HomeScreen> {
                                         children: [
                                           Text(
                                             item.title,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 18.0,
                                             ),
                                           ),
-                                          SizedBox(height: 8.0),
+                                          const SizedBox(height: 8.0),
                                           Text(
                                             item.description ??
                                                 "No Description Available",
                                             maxLines: 2,
                                             overflow: TextOverflow.ellipsis,
                                           ),
-                                          SizedBox(height: 10.0),
+                                          const SizedBox(height: 10.0),
                                           Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.end,
                                             children: [
                                               IconButton(
-                                                icon: Icon(Icons.thumb_up),
+                                                icon:
+                                                    const Icon(Icons.thumb_up),
                                                 onPressed: () {
                                                   String title = item.title;
-                                                  print('Liked: $title');
+                                                  // likedArticle.add(title);
+                                                  // print(likedArticle);
+                                                  Provider.of<LikedArticlesProvider>(
+                                                          context,
+                                                          listen: false)
+                                                      .addLikedArticle(title);
+
+                                                  // print('Liked: $title');
                                                 },
                                               ),
                                             ],
